@@ -9,9 +9,9 @@ You'll need to create a GCS storage bucket, a pub/sub topic (default is "streamd
 Start a Cloud Shell, clone this repo and run the launch script, substituting your project name and storage bucket
 
 ``` sh
-git clone 
-cd 
-./run_oncloud.sh <project-id> <storage-bucket> PubSubToBigQuery
+git clone https://github.com/bjoernrost/dataflow-playground.git
+cd dataflow-playground
+./run_oncloud.sh <project-id> <storage-bucket> PubSubToBigQueryMsg
 ```
 ### publish some test messages
 
