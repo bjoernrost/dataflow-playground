@@ -21,6 +21,8 @@ mvn compile -e exec:java \
       -Dexec.args="--project=$PROJECT \
       --stagingLocation=gs://$BUCKET/staging/ $* \
       --tempLocation=gs://$BUCKET/staging/ \
+      --diskSizeGb=4 \
+      --workerMachineType=n1-standard-1 \
       --runner=DataflowRunner"
 
 

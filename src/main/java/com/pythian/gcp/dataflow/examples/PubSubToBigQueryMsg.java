@@ -43,8 +43,8 @@ public class PubSubToBigQueryMsg {
   public static void main(String[] args) {
     DataflowPipelineOptions options = PipelineOptionsFactory.fromArgs(args).withValidation().as(DataflowPipelineOptions.class);
     // Override the default worker size to the smallest possible
-    options.setDiskSizeGb(4);
-    options.setWorkerMachineType("n1-standard-1");
+//    options.setDiskSizeGb(4);
+//    options.setWorkerMachineType("n1-standard-1");
     // Set job mode to streaming
     options.setStreaming(true);
     options.setRunner(DataflowRunner.class);
@@ -60,8 +60,10 @@ public class PubSubToBigQueryMsg {
     fields.add(new TableFieldSchema().setName("message").setType("STRING"));
     TableSchema schema = new TableSchema().setFields(fields);
    
-    // Start the pipeline with reading messages from PubSub
+    // Start the pipeline 
     Pipeline p = Pipeline.create(options);
+    // Fill the pipeline by reading a PubSub topic
+    // Create a pCollection of BQ TableRows
     PCollection<TableRow> orders = p 
     .apply(PubsubIO.readStrings().fromTopic(TOPIC_NAME))
     .apply("ConvertDataToTableRows", ParDo.of(new DoFn<String, TableRow>() {
